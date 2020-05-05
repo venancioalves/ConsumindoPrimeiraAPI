@@ -1,5 +1,12 @@
 <?php
 
+require_once 'app/config/config.php';
+require_once 'app/modules/hg-api.php';
+
+$hg = new HG_API(HG_API_KEY);
+$dolar = $hg->dollar_quotation();
+
+
 
 ?>
 
@@ -22,7 +29,10 @@
         <div class="row">
             <div class="col-12">
                 <p>Cotação Dólar</p>
-                <p>USD <span class="badge badge-pill badge-success">XXXX</span> </p>
+                    <?php if ($hg->is_error() == false); ?>
+                    <p>USD <span class="badge badge-pill badge-success"><?php echo($dolar['buy']); ?></span></p>
+                    
+
             </div>
 
         </div>
